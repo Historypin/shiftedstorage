@@ -1,0 +1,39 @@
+name: shifted-storage
+
+services:
+  ipfs:
+    build:
+      context: ./docker
+      dockerfile: ipfs.dockerfile 
+    ports:
+      #- "4001:4001" # ipfs swarm
+      - "5001:5001" # ipfs api
+      - "9009:8080" # ipfs gateway
+    volumes:
+      - ipfs:/data/ipfs
+    restart: unless-stopped
+    
+  ipfs-cluster:
+    build:
+      context: ./docker
+      dockerfile: ipfs-cluster.dockerfile
+    depends_on:
+      - ipfs
+    environment:
+      CLUSTER_PEERNAME: ${CLUSTER_PEERNAME}
+      CLUSTER_SECRET: ${CLUSTER_SECRET}
+      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs/tcp/5001
+      CLUSTER_CRDT_TRUSTEDPEERS: '*'
+      CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094
+      CLUSTER_MONITORPINGINTERVAL: 2s
+    ports:
+      - "127.0.0.1:9094:9094" # ipfs-cluster-ctl use on host
+      - "9095:9095" # cluster ipfs proxy endpoint
+      - "9096:9096" # cluster swarm endpoint
+    volumes:
+      - ipfs-cluster:/data/ipfs-cluster
+    restart: unless-stopped
+      
+volumes:
+  ipfs:
+  ipfs-cluster:

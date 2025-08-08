@@ -1,0 +1,1 @@
+FROM ipfs/kubo:latest
