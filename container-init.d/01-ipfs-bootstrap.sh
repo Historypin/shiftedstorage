@@ -8,3 +8,5 @@ ipfs bootstrap rm all
 if [[ -n "${IPFS_BOOTSTRAP}" ]]; then
     ipfs bootstrap add "${IPFS_BOOTSTRAP}"
 fi
+
+ipfs config --json Addresses.Swarm '["/ip4/0.0.0.0/tcp/4001", "/ip6/::/tcp/4001"]'
