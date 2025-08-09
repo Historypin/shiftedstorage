@@ -5,6 +5,6 @@ set -ex
 ipfs bootstrap rm all
 
 # non bootstrap nodes will define a bootstrap to learn about the network
-if [[ -z "${IPFS_BOOTSTRAP}" ]]; then
+if [[ -n "${IPFS_BOOTSTRAP}" ]]; then
     ipfs bootstrap add "${IPFS_BOOTSTRAP}"
 fi
