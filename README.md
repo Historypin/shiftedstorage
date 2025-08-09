@@ -1,10 +1,15 @@
 # shifted-storage
 
-*shifted-storage* provides decentralized, private storage for community archives
-that want to back up each others files.
+*shifted-storage* provides decentralized, private storage for community
+archives that want to back up each others files. It is a [Docker Compose]
+configuration for running a *private* [IPFS Cluster] using a IPFS client that
+is disconnected from the public IPFS network.
 
-It is a [Docker Compose] configuration for running a *private* [IPFS Cluster]
-using a IPFS client that is disconnected from the public IPFS network.
+* nodes talk to each other
+* nodes can come and go
+* private cluster
+* private ipfs
+* private network (tailscale)
 
 ## Configure Tailscale
 
