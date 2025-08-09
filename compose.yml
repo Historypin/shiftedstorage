@@ -1,39 +1,49 @@
 name: shifted-storage
 
 services:
+  ts-shifted-storage:
+    image: tailscale/tailscale:latest
+    hostname: ${CLUSTER_PEERNAME}
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+    volumes:
+      - tailscale:/var/lib/tailscale
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
   ipfs:
-    build:
-      context: ./docker
-      dockerfile: ipfs.dockerfile 
-    ports:
-      #- "4001:4001" # ipfs swarm
-      - "5001:5001" # ipfs api
-      - "9009:8080" # ipfs gateway
+    image: ipfs/kubo:latest
+    environment:
+      IPFS_SWARM_KEY: ${IPFS_SWARM_KEY}
     volumes:
       - ipfs:/data/ipfs
+      - ./container-init.d/:/container-init.d/
+    network_mode: service:ts-shifted-storage
     restart: unless-stopped
     
   ipfs-cluster:
-    build:
-      context: ./docker
-      dockerfile: ipfs-cluster.dockerfile
+    image: ipfs/ipfs-cluster:latest
     depends_on:
       - ipfs
     environment:
+      IPFS_SWARM_KEY: ${IPFS_SWARM_KEY}
       CLUSTER_PEERNAME: ${CLUSTER_PEERNAME}
       CLUSTER_SECRET: ${CLUSTER_SECRET}
-      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs/tcp/5001
+      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/0.0.0.0/tcp/5001
       CLUSTER_CRDT_TRUSTEDPEERS: '*'
       CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094
       CLUSTER_MONITORPINGINTERVAL: 2s
-    ports:
-      - "127.0.0.1:9094:9094" # ipfs-cluster-ctl use on host
-      - "9095:9095" # cluster ipfs proxy endpoint
-      - "9096:9096" # cluster swarm endpoint
     volumes:
       - ipfs-cluster:/data/ipfs-cluster
+    network_mode: service:ts-shifted-storage
     restart: unless-stopped
       
 volumes:
   ipfs:
   ipfs-cluster:
+  tailscale:
