@@ -22,7 +22,7 @@ services:
       IPFS_SWARM_KEY: ${IPFS_SWARM_KEY}
     volumes:
       - ipfs:/data/ipfs
-      - ./container-init.d/:/container-init.d/
+      - ./container-init.d:/container-init.d
     network_mode: service:ts-shifted-storage
     restart: unless-stopped
     
@@ -31,7 +31,6 @@ services:
     depends_on:
       - ipfs
     environment:
-      IPFS_SWARM_KEY: ${IPFS_SWARM_KEY}
       IPFS_CLUSTER_BOOTSTRAP: ${IPFS_CLUSTER_BOOTSTRAP}
       CLUSTER_PEERNAME: ${CLUSTER_PEERNAME}
       CLUSTER_SECRET: ${CLUSTER_SECRET}

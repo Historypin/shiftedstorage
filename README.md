@@ -15,6 +15,9 @@ is disconnected from the public IPFS network.
 
 ## Setup Bootstrap Node
 
+1. create IPFS_SWARM_KEY
+2. create CLUSTER_SECRET
+
 ## Environment File
 
 Create a `.env` file:
