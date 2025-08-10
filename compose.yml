@@ -1,7 +1,7 @@
 name: shifted-storage
 
 services:
-  ts-shifted-storage:
+  tailscale:
     image: tailscale/tailscale:latest
     hostname: ${CLUSTER_PEERNAME}
     environment:
@@ -24,7 +24,7 @@ services:
     volumes:
       - ipfs:/data/ipfs
       - ./container-init.d:/container-init.d
-    network_mode: service:ts-shifted-storage
+    network_mode: service:tailscale
     restart: unless-stopped
     
   ipfs-cluster:
@@ -42,7 +42,7 @@ services:
       GOLOG_LOG_LEVEL: debug
     volumes:
       - ipfs-cluster:/data/ipfs-cluster
-    network_mode: service:ts-shifted-storage
+    network_mode: service:tailscale
     restart: unless-stopped
       
 volumes:
