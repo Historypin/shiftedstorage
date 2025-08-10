@@ -132,10 +132,12 @@ in a line that looks like:
 Create a copy of your `.env` file called `env` and then add the following to it, while filling in the `<...>` templates:
 
 ```
+# fill in the templated portions
 BOOTSTRAP_TAILSCALE_IP=<YOUR BOOTSTRAP TAILSCALE IP HERE>
 BOOTSTRAP_IPFS_PEER_ID=<YOUR BOOTSTRAP IPFS PEER ID HERE>
 BOOTSTRAP_IPFS_CLUSTER_PEER_ID=<YOUR BOOTSTRAP IPFS CLUSTER PEER ID HERE>
 
+# you can leave these alone
 IPFS_CLUSTER_BOOTSTRAP=/ip4/$BOOTSTRAP_TAILSCALE_IP/tcp/9096/ipfs/$BOOTSTRAP_IPFS_CLUSTER_PEER_ID
 IPFS_BOOTSTRAP=/ip4/$BOOTSTRAP_TAILSCALE_IP/tcp/4001/ipfs/$BOOTSTRAP_IPFS_PEER_ID
 ```
@@ -167,4 +169,4 @@ $ docker compose stop
 [Docker]: https://www.docker.com/get-started/
 [Tailscale]: https://tailscale.com/
 [IPFS Cluster]: https://ipfscluster.io/
-[Git]: 
+[Git]: https://git-scm.com/

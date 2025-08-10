@@ -44,7 +44,7 @@ services:
       - ipfs-cluster:/data/ipfs-cluster
     network_mode: service:tailscale
     restart: unless-stopped
-      
+
 volumes:
   ipfs:
   ipfs-cluster:
