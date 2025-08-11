@@ -28,7 +28,7 @@ In a nutshell, the goal of *shifted-storage* is to provide an alternative to "bi
 
 Of course it's not all rainbows and unicorns, there are tradeoffs to this approach:
 
-* The data in the storage cluster is only as stable as the institutions that are helping host it.
+* The data in the storage cluster is only as stable as the people and organizations that are helping host it.
 * Participants in the cluster can potentially access and delete data that does not belong to them.
 * Unlike polished big-tech storage platforms (e.g. Google Drive, Box, etc) there are usability challenges to adding and removing content from the storage cluster.
 * The IPFS and Tailscale software being used is open source, but the people maintaining it may change their minds, and focus on other things.
