@@ -77,10 +77,7 @@ $ cd shifted-storage
 Create a `.env` file:
 
 ```
-IPFS_SWARM_KEY="/key/swarm/psk/1.0.0/
-/base16/
-<YOUR_SWARM_KEY>"
-
+IPFS_SWARM_KEY=<YOUR_SWARM_KEY>
 CLUSTER_SECRET=<YOUR_CLUSTER_SECRET>
 TS_AUTHKEY=<YOUR_TAILSCALE_AUTHKEY>
 CLUSTER_PEERNAME=<YOUR_PEER_NAME>
@@ -102,9 +99,9 @@ $ docker compose stop
 
 ### Let Others Join
 
-In order to let others join the network you will need to share a modified version of your `.env` file with them via a secure channel (e.g. WhatsApp or Signal).
+In order to let others join the network you will need to share a modified version of the compose file with them via a secure channel (e.g. WhatsApp or Signal).
 
-The provided `bootstrap.py` utility will read your existing `.env` file and execute some commands in your running docker containers to determine additional information for new nodes to use when bootstrapping into the network:
+The provided `bootstrap.py` utility will read your existing `compose.yml` and `.env` file and execute some commands in your running docker containers to determine additional information for new nodes to use when bootstrapping into the network:
 
 - Tailscale IP
 - IPFS Peer ID
@@ -120,27 +117,19 @@ The new configuration will be printed to `stdout`, which you could redirect to a
 
 ## Joining a Network
 
-In order to join an existing *shifted-storage* network you will need to be given a `.env` file by one of the other members. You will also need to install [Docker].
+In order to join an existing *shifted-storage* network you will need to be given a `compose.yml` file by one of the other members.
 
-Download the `shifted-storage` configuration files from Github, and unzip it:
+You should be able to run this using Docker, but gor our project we have been standardizing on QNAP devices that are running the Container Station application.
 
-https://github.com/edsu/shifted-storage/archive/refs/heads/main.zip
-
-**TODO: move repo to historypin github account**
-
-This will create a directory `shifted-storage`. Put the `env` file into the `shifted-storage` directory using the name `.env`. It's important to have the `.` prefix in the name!
-
-Run the node with:
-
-```
-$ docker compose up -d
-```
-
-If you want to stop the shifted-storage service at any time you can run:
-
-```
-$ docker compose stop
-```
+1. Install Container Station from Apps if it's not already available.
+2. Open Container Station.
+3. Click `Applications` option in the menu on the left.
+4. Click the `Create` button.
+5. In the Application Name box enter `shifted-storage`
+6. Paste the contents of the supplied `compose.yml` file into the text box.
+7. Click the `create` button.
+8. Click the `Containers` option in the menu on the left.
+9. Verify that you see three containers running.
 
 ## Working With Storage
 

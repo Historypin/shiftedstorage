@@ -19,8 +19,11 @@ services:
   ipfs:
     image: ipfs/kubo:latest
     environment:
-      IPFS_SWARM_KEY: ${IPFS_SWARM_KEY}
       IPFS_BOOTSTRAP: ${IPFS_BOOTSTRAP}
+      IPFS_SWARM_KEY: |
+        /key/swarm/psk/1.0.0/
+        /base16/
+        ${IPFS_SWARM_KEY}
     volumes:
       - ipfs:/data/ipfs
       - ./container-init.d:/container-init.d
