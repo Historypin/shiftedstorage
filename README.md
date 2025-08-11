@@ -134,6 +134,20 @@ If you want to stop the shifted-storage service at any time you can run:
 $ docker compose stop
 ```
 
+## Working With Storage
+
+### Adding Content
+
+TODO
+
+### Checking Status
+
+TODO
+
+### Removing Content
+
+TODO
+
 [Docker]: https://www.docker.com/get-started/
 [Tailscale]: https://tailscale.com/
 [IPFS Cluster]: https://ipfscluster.io/
