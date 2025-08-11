@@ -44,7 +44,7 @@ The security and privacy of your shifted-storage network is provided by two keys
 * IPFS Swarm Key
 * IPFS Cluster Key
 
-You will want to keep these in a secure place and onlye share them with others using a secure, end-to-end encrypted communication channel like Signal or WhatsApp.
+You will want to keep these in a secure place and only share them with others using a secure, end-to-end encrypted communication channel like Signal or WhatsApp.
 
 To create the keys you can:
 
