@@ -1,4 +1,4 @@
-# shifted-storage
+# ⇧📁 shifted-storage
 
 *shifted-storage* is a specific configuration of [Docker], [IPFS Cluster] and
 [Tailscale] that provides decentralized storage for a trusted network of participants or peers.
