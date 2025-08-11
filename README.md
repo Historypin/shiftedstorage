@@ -33,7 +33,7 @@ Of course it's not all rainbows and unicorns, there are tradeoffs to this approa
 * Unlike polished big-tech storage platforms (e.g. Google Drive, Box, etc) there are usability challenges to adding and removing content from the storage cluster.
 * The IPFS and Tailscale software being used is open source, but the people maintaining it may change their minds, and focus on other things.
 * Tailscale makes establishing a virtual private mesh network easy using the open source Wireguard software and some of their own open source code and infrastructure. Howevver Tailscale are a company and could decide to change how they do things at any time.
-* Tailscale doesn't have access to any of the stored data, but they do know the network topology of the IPFS cluster, and could be issued a subpoena in some jurisdictions that forces them to share who is a member of the network.
+* Tailscale doesn't have access to any of the stored data, but they do know the network topology of the IPFS cluster, and could be issued a subpoena in some jurisdictions that forces them to share who is a member of the network. Read more about this [here](https://tailscale.com/blog/tailscale-privacy-anonymity).
 
 ## Setup Bootstrap Node
 
