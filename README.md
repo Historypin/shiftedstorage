@@ -1,6 +1,6 @@
 # ⇧📁 shifted-storage
 
-*shifted-storage* is a tailored configuration of [Docker], [IPFS Cluster] and [Tailscale] that allows a trusted network of archives to cooperatively back up each other's data. This work is part of Shift Collective's [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
+*shifted-storage* is a tailored configuration of [Docker], [IPFS Cluster] and [Tailscale] that allows a trusted network of archives to cooperatively back up each other's data. This work is part of [Shift Collective]'s [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
 
 In a nutshell, the goal of *shifted-storage* is to provide an alternative to "bigtech" storage services, that is:
 
@@ -162,3 +162,4 @@ TODO
 [Git]: https://git-scm.com/
 [Filecoin Foundation for the Decentralized Web]: https://ffdweb.org/
 [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives]: https://www.shiftcollective.us/ffdw
+[Shift Collective]: https://www.shiftcollective.us/
