@@ -42,7 +42,7 @@ services:
       GOLOG_LOG_LEVEL: debug
     volumes:
       - ipfs-cluster:/data/ipfs-cluster
-      - ./data:/data/incoming
+      - ./incoming:/incoming
     network_mode: service:tailscale
     restart: unless-stopped
 
