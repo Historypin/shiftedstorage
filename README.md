@@ -8,7 +8,7 @@ In a nutshell, the goal of *shifted-storage* is to provide an alternative to "bi
   be deployed on infrastructure that is operated by the members in their data centers,
   offices and homes. Members can join at any time to increase the capacity of the
   network, and can leave without disrupting the remaining members.
-- *Trustfull* instead of *Trustless*: members have shared values and goals in
+- *Trustful* instead of *Trustless*: members have shared values and goals in
   order to join the network. It is up to specific communities to decide what this means for them.
 - *Mutable* instead of *Immutable*: data doesn't get replicated outside of the
   trusted network, and it's possible to remove data from the entire network at
