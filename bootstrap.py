@@ -19,7 +19,7 @@ def main():
     env = open(".env").read()
     
     # remove existing cluster peer name
-    env = re.sub("^CLUSTER_PEERNAME.+$", "", env)
+    env = re.sub("^CLUSTER_PEERNAME.+$", "", env, flags=re.MULTILINE)
 
     # peer_name
     if len(sys.argv) != 2:
