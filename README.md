@@ -109,17 +109,19 @@ The provided `bootstrap.py` utility will read your existing `compose.yml` and `.
 
 You need to supply a "node name" for the new node in your cluster. It's good to use a name without spaces or punctuation that will help you identify the node later since this is the hostname that it will appear under in the Tailscale network. For example, if you have are adding a node for "Warrior Women Project" you could:
 
-The new configuration will be printed to `stdout`, which you could redirect to a file for sharing. 
+```
+./bootstrap.py warriorwomen > warriorwomen-compose.yml
+```
 
-```
-./bootstrap.py warriorwomen > warriorwomen.env
-```
+You can then share the compose.yml file with the new member for them to use in their own Docker environment.
+
+**DANGER: Be careful to share this file using a private channel with end-to-end encryption like Signal or WhatsApp. It contains secret keys for the Tailscale network as well as your IPFS Cluster.**
 
 ## Joining a Network
 
 In order to join an existing *shifted-storage* network you will need to be given a `compose.yml` file by one of the other members.
 
-You should be able to run this using Docker, but gor our project we have been standardizing on QNAP devices that are running the Container Station application.
+You should be able to run this using Docker, but for our project we have been standardizing on QNAP devices that are running the Container Station application.
 
 1. Install Container Station from Apps if it's not already available.
 2. Open Container Station.
