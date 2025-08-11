@@ -1,9 +1,9 @@
 # ⇧📁 shifted-storage
 
-*shifted-storage* is a specific configuration of [Docker], [IPFS Cluster] and
-[Tailscale] that provides decentralized storage for a trusted network of participants or peers.
-The goal of *shifted-storage* is to serve as an alternative to bigtech storage services, 
-that is:
+*shifted-storage* is a tailored configuration of [Docker], [IPFS Cluster] and
+[Tailscale] that allows a trusted network of archives back up each other's
+data. The goal of *shifted-storage* is to provide an alternative to "bigtech"
+storage services, that is:
 
 - *Decentralized* instead of *Centralized*: the software is open source and can
   be deployed on infrastructure that is operated by the members in their data centers,
@@ -21,7 +21,7 @@ that is:
   directly with each other using a virtual private mesh network, that only they
   can see.
 
-*shifted-storage* is essentially just a Docker Compose configuration for bringing up three containers so that they can talk to other similarly configured shifted-storage instances. The containers are:
+*shifted-storage* is really just a Docker Compose configuration for reliably bringing up Docker services that allows a network of shifted-storage instances to talk to each other. The containers are:
 
 * *tailscale*: a Tailscale client that establishes your node's connection to other trusted nodes in the mesh network.
 * *ipfs*: an IPFS daemon running on the Tailscale network.
