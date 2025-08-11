@@ -74,8 +74,8 @@ IPFS_SWARM_KEY="/key/swarm/psk/1.0.0/
 <YOUR_SWARM_KEY>"
 
 CLUSTER_SECRET=<YOUR_CLUSTER_SECRET>
-CLUSTER_PEERNAME=<YOUR_PEER_NAME>
 TS_AUTHKEY=<YOUR_TAILSCALE_AUTHKEY>
+CLUSTER_PEERNAME=<YOUR_PEER_NAME>
 ```
 
 ### Run
@@ -92,54 +92,22 @@ If you want to stop the service at any time you can execute this command, as lon
 $ docker compose stop
 ```
 
-### Sharing with Others
+### Let Others Join
 
-In order to let others join the network you will need to share your `.env` file with them via a secure channel (e.g. WhatsApp or Signal). But before you do that you'll need to add three additional pieces of information to it. This information is used by the new node to discover the rest of the cluster.
+In order to let others join the network you will need to share a modified version of your `.env` file with them via a secure channel (e.g. WhatsApp or Signal).
 
-#### BOOTSTRAP_TAILSCALE_IP
+The provided `bootstrap.py` utility will read your existing `.env` file and execute some commands in your running docker containers to determine additional information for new nodes to use when bootstrapping into the network:
 
-This is the IP address of your containers on the private mesh network that Tailscale helps you establish.
+- Tailscale IP
+- IPFS Peer ID
+- IPFS Cluster Peer ID
 
-```
-$ docker compose exec -ti tailscale tailscale ip --4
-```
+You need to supply a "node name" for the new node in your cluster. It's good to use a name without spaces or punctuation that will help you identify the node later since this is the hostname that it will appear under in the Tailscale network. For example, if you have are adding a node for "Warrior Women Project" you could:
 
-#### BOOTSTRAP_IPFS_PEER_ID
-
-This is the unique identifier for your IPFS daemon:
+The new configuration will be printed to `stdout`, which you could redirect to a file for sharing. 
 
 ```
-$ docker compose exec -ti ipfs ipfs id -f "<id>"
-```
-
-#### BOOTSTRAP_IPFS_CLUSTER_PEER_ID
-
-This is a unique identifier for your IPFS Cluster daemon:
-
-```
-$ docker compose exec -ti ipfs-cluster ipfs-cluster-ctl id
-```
-
-Note the ID is the first string in the output, for example the string `12D3KooWPR8q7wrGNbcdHsixXttBuujVS67kzTAjM8oN5zjR75Md`
-in a line that looks like:
-
-```
-12D3KooWPR8q7wrGNbcdHsixXttBuujVS67kzTAjM8oN5zjR75Md | shifted-storage-edsu | Sees 0 other peers
-```
-
-#### Share!
-
-Create a copy of your `.env` file called `env` and then add the following to it, while filling in the `<...>` templates:
-
-```
-# fill in the templated portions
-BOOTSTRAP_TAILSCALE_IP=<YOUR BOOTSTRAP TAILSCALE IP HERE>
-BOOTSTRAP_IPFS_PEER_ID=<YOUR BOOTSTRAP IPFS PEER ID HERE>
-BOOTSTRAP_IPFS_CLUSTER_PEER_ID=<YOUR BOOTSTRAP IPFS CLUSTER PEER ID HERE>
-
-# you can leave these alone
-IPFS_CLUSTER_BOOTSTRAP=/ip4/$BOOTSTRAP_TAILSCALE_IP/tcp/9096/ipfs/$BOOTSTRAP_IPFS_CLUSTER_PEER_ID
-IPFS_BOOTSTRAP=/ip4/$BOOTSTRAP_TAILSCALE_IP/tcp/4001/ipfs/$BOOTSTRAP_IPFS_PEER_ID
+./bootstrap.py warriorwomen > warriorwomen.env
 ```
 
 ## Joining a Network
