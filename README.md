@@ -1,9 +1,8 @@
 # ⇧📁 shifted-storage
 
-*shifted-storage* is a tailored configuration of [Docker], [IPFS Cluster] and
-[Tailscale] that allows a trusted network of archives back up each other's
-data. The goal of *shifted-storage* is to provide an alternative to "bigtech"
-storage services, that is:
+*shifted-storage* is a tailored configuration of [Docker], [IPFS Cluster] and [Tailscale] that allows a trusted network of archives back up each other's data. This work is part of Shift Collective's [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
+
+In a nutshell, the goal of *shifted-storage* is to provide an alternative to "bigtech" storage services, that is:
 
 - *Decentralized* instead of *Centralized*: the software is open source and can
   be deployed on infrastructure that is operated by the members in their data centers,
@@ -26,6 +25,15 @@ storage services, that is:
 * *tailscale*: a Tailscale client that establishes your node's connection to other trusted nodes in the mesh network.
 * *ipfs*: an IPFS daemon running on the Tailscale network.
 * *ipfs-cluster*: an IPFS Cluster daemon configured to talk to the IPFS service using the Tailscale network.
+
+Of course it's not all rainbows and unicorns, there are tradeoffs to this approach:
+
+* The data in the storage cluster is only as stable as the institutions that are helping host it.
+* Participants in the cluster can potentially access and delete data that does not belong to them.
+* Unlike polished big-tech storage platforms (e.g. Google Drive, Box, etc) there are usability challenges to adding and removing content from the storage cluster.
+* The IPFS and Tailscale software being used is open source, but the people maintaining it may change their minds, and focus on other things.
+* Tailscale makes establishing a virtual private mesh network easy using the open source Wireguard software and some of their own open source code and infrastructure. Howevver Tailscale are a company and could decide to change how they do things at any time.
+* Tailscale doesn't have access to any of the stored data, but they do know the network topology of the IPFS cluster, and could be issued a subpoena in some jurisdictions that forces them to share who is a member of the network.
 
 ## Setup Bootstrap Node
 
@@ -152,3 +160,5 @@ TODO
 [Tailscale]: https://tailscale.com/
 [IPFS Cluster]: https://ipfscluster.io/
 [Git]: https://git-scm.com/
+[Filecoin Foundation for the Decentralized Web]: https://ffdweb.org/
+[Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives]: https://www.shiftcollective.us/ffdw
