@@ -29,7 +29,7 @@ that is:
 
 ## Setup Bootstrap Node
 
-*Note: if you are creating an shifted-storage node in an existing network jump down to the **Join** section below.*
+*Note: if you are creating an shifted-storage node in an existing network jump down to the [Let Others Join](#let-others-join) section below.*
 
 The first node in a *shifted-storage* network is known as the bootstrap node. It requires a bit more setup than subsequent nodes because the Tailscale mesh network needs to be created and configured, and a couple secret keys need to be defined. This bootstrap node will be used by subsequent nodes to find the rest of the network when they join.
 
