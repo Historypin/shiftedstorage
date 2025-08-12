@@ -42,7 +42,6 @@ services:
       CLUSTER_CRDT_TRUSTEDPEERS: '*'
       CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094
       CLUSTER_MONITORPINGINTERVAL: 2s
-      GOLOG_LOG_LEVEL: debug
     volumes:
       - ipfs-cluster:/data/ipfs-cluster
       - ./incoming:/incoming
