@@ -1,8 +1,8 @@
-# ⇧📁 shifted-storage
+# ⇧📁 shiftedstorage
 
-*shifted-storage* is a tailored configuration of [Docker], [IPFS Cluster] and [Tailscale] that allows a trusted network of archives to cooperatively back up each other's data. This work is part of [Shift Collective]'s [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
+*shiftedstorage* is a tailored configuration of [Docker], [IPFS Cluster] and [Tailscale] that allows a trusted network of archives to cooperatively back up each other's data. This work is part of [Shift Collective]'s [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
 
-In a nutshell, the goal of *shifted-storage* is to provide an alternative to "big-tech" storage services, that is:
+In a nutshell, the goal of *shiftedstorage* is to provide an alternative to "big-tech" storage services, that is:
 
 - *Decentralized* instead of *Centralized*: the software is open source and can
   be deployed on infrastructure that is operated by the members in their data centers,
@@ -15,12 +15,12 @@ In a nutshell, the goal of *shifted-storage* is to provide an alternative to "bi
   any time.
 - *Private* instead of *Public*: many peer-to-peer and distributed web systems
   are built around the idea of data being globally available, and easy to
-  replicate. Data in *shifted-storage* is not made available to the
+  replicate. Data in *shiftedstorage* is not made available to the
   wider IPFS network. The use of Tailscale allows peers to communicate
   directly with each other using a virtual private mesh network, that only they
   can see.
 
-*shifted-storage* is really just a Docker Compose configuration for reliably bringing up Docker services that allows a network of shifted-storage instances to talk to each other. The containers are:
+*shiftedstorage* is really just a Docker Compose configuration for reliably bringing up Docker services that allows a network of shiftedstorage instances to talk to each other. The containers are:
 
 * *tailscale*: a Tailscale client that establishes your node's connection to other trusted nodes in the mesh network.
 * *ipfs*: an IPFS daemon running on the Tailscale network.
@@ -35,63 +35,60 @@ Of course it's not all rainbows and unicorns, there are tradeoffs to this approa
 * Tailscale makes establishing a virtual private mesh network easy using the open source Wireguard software and some of their own open source code and infrastructure. Howevver Tailscale are a company and could decide to change how they do things at any time.
 * Tailscale doesn't have access to any of the stored data, but they do know the network topology of the IPFS cluster, and could be issued a subpoena in some jurisdictions that forces them to share who is a member of the network. Read more about this [here](https://tailscale.com/blog/tailscale-privacy-anonymity).
 
+## Install
+
+First, install the `ipfs` and `ipfs-cluster-ctl` command line utilities, and make sure they are in your system path. You don't need to run the cluster on your workstation, however having these utilities available makes it easy to talk to running nodes.
+
+* `ipfs`: https://docs.ipfs.tech/install/command-line/#install-official-binary-distributions
+* `ipfs-cluster-ctl`: https://dist.ipfs.tech/#ipfs-cluster-ctl
+
+You will need to install the `shiftedstorage` utility which helps create the Docker compose file for the bootstrap node and then clone that for subsequent nodes in your network.
+
+You can install it with:
+
+```
+pip install shiftedstorage
+```
+
+or if you have [uv]() installed you can just run it without installing it with `uvx`:
+
+```
+uvx shiftedstorage
+```
+
 ## Setup Bootstrap Node
 
-*Note: if you are creating a shifted-storage node in an existing network jump down to the [Let Others Join](#let-others-join) section below.*
+*Note: if you are creating a shiftedstorage node in an existing network jump down to the [Let Others Join](#let-others-join) section below.*
 
-The first node in a *shifted-storage* network is known as the bootstrap node. It requires a bit more setup than subsequent nodes because the Tailscale mesh network needs to be created and configured, and a couple secret keys need to be defined. This bootstrap node will be used by subsequent nodes to find the rest of the network when they join.
+The first node in a *shiftedstorage* network is known as the bootstrap node. It requires a bit more setup than subsequent nodes because the Tailscale mesh network needs to be created and configured, and a couple secret keys need to be defined. This bootstrap node will be used by subsequent nodes to find the rest of the network when they join.
 
 ### Tailscale
 
-Fill this in! The end goal is to get a `TS_AUTHKEY`.
+TBD! The end goal is to get a `TS_AUTHKEY`.
 
-### Keys
+Be sure to also mention that any admins should get invited to the Tailscale so they can see it from their workstation.
 
-The security and privacy of your shifted-storage network is provided by two keys:
+### Create Compose File
 
-* IPFS Swarm Key
-* IPFS Cluster Key
-
-You will want to keep these in a secure place and only share them with others using a secure, end-to-end encrypted communication channel like Signal or WhatsApp.
-
-To create the keys you can:
+Use your Tailscale token to create your bootstrap node, which here is named `bootstrap` but can be whatever you like. This will be the hostname of the bootstrap node in your Tailscale network.
 
 ```
-$ openssl rand -hex 32 > swarm.key
-$ openssl rand -hex 32 > ipfs-cluster.key
+uvx shiftedstorage create --ts-authkey "YOUR KEY HERE" --cluster-peername bootstrap --output compose.yml
 ```
 
-### Cluster Peer Name
+This should write a Docker Compose configuration to `compose.yaml`.
 
-You will need to create a name for your node. This name will be used to create a Tailscale host name in your virtual private network. You could use an abbreviated form of your organization name, or your personal name.
+**DANGER: Be careful to not make this compose file public since it contains secret keys!**
 
-### Get the Docker Configuration
+### Start Bootstrap
 
-```
-$ git clone https://github.com/historypin/shifted-storage
-$ cd shifted-storage
-```
-
-### Environment File
-
-Create a `.env` file:
-
-```
-IPFS_SWARM_KEY=<YOUR_SWARM_KEY>
-CLUSTER_SECRET=<YOUR_CLUSTER_SECRET>
-TS_AUTHKEY=<YOUR_TAILSCALE_AUTHKEY>
-CLUSTER_PEERNAME=<YOUR_PEER_NAME>
-```
-
-### Run
-
-Now we are ready to run!
+You can now start up your bootstrap node with:
 
 ```bash
 $ docker compose up -d
 ```
 
-If you want to stop the service at any time you can execute this command, as long as you are in the `shifted-storage` directory:
+If you want to stop the service at any time you can execute this command, as long as you are in the `shiftedstorage` directory:
 
 ```
 $ docker compose stop
@@ -101,33 +98,21 @@ $ docker compose stop
 
 In order to let others join the network you will need to share a modified version of the compose file with them via a secure channel (e.g. WhatsApp or Signal).
 
-The provided `bootstrap.py` utility will read your existing `compose.yml` and `.env` file and execute some commands in your running docker containers to determine additional information for new nodes to use when bootstrapping into the network:
-
-- Tailscale IP
-- IPFS Peer ID
-- IPFS Cluster Peer ID
-
-You need to supply a "node name" for the new node in your cluster. It's good to use a name without spaces or punctuation that will help you identify the node later since this is the hostname that it will appear under in the Tailscale network. For example, if you have are adding a node for "Warrior Women Project" you could:
-
 ```
-./bootstrap.py warriorwomen > warriorwomen-compose.yml
+uvx shiftedstorage clone --input compose.yml --cluster-peername acme --output acme-compose.yml --bootstrap-host boostrap
 ```
 
-You can then share the compose.yml file with the new member for them to use in their own Docker environment.
+This will write out a `acme-compose.yml` file which you can share via a secure channel with someone running a machine at that organization.
 
-**DANGER: Be careful to share this file using a private channel with end-to-end encryption like Signal or WhatsApp. It contains secret keys for the Tailscale network as well as your IPFS Cluster.**
+You should be able to run this using `docker compose`, but for the original Shift-FFDW project we have been standardizing on partners using a [QNAP NAS](https://www.qnap.com/en-us/product/tbs-h574tx) which makes is easy to set up. You can use whatever device you want as long as you can run Docker on it and it has at least 4GB of memory (more couldn't hurt).
 
-## Joining a Network
-
-In order to join an existing *shifted-storage* network you will need to be given a `compose.yml` file by one of the other members.
-
-You should be able to run this using Docker, but for our project we have been standardizing on QNAP devices that are running the Container Station application.
+For people with a QNAP you can:
 
 1. Install Container Station from Apps if it's not already available.
 2. Open Container Station.
 3. Click `Applications` option in the menu on the left.
 4. Click the `Create` button.
-5. In the Application Name box enter `shifted-storage`
+5. In the Application Name box enter `shiftedstorage`
 6. Paste the contents of the supplied `compose.yml` file into the text box.
 7. Click the `create` button.
 8. Click the `Containers` option in the menu on the left.
@@ -135,17 +120,31 @@ You should be able to run this using Docker, but for our project we have been st
 
 ## Working With Storage
 
+The shiftedstorage utility offers some functionality to add and remove content from storage. These are really just wrappers around the `ipfs-cluster-ctl` command, which you can choose to use directly of course.
+
 ### Adding Content
 
-TODO
+```
+uvx shiftedstorage add --host acme my-file.pdf
+```
+
+or 
+
+```
+uvx shiftedstorage add --host acme my-directory/
+```
 
 ### Checking Status
 
-TODO
+```
+uvx shiftedstorage status --host <cid>
+```
 
 ### Removing Content
 
-TODO
+```
+uvx shiftedstorage rm --host <cid>
+```
 
 [Docker]: https://www.docker.com/get-started/
 [Tailscale]: https://tailscale.com/
