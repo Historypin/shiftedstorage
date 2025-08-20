@@ -1,5 +1,7 @@
 # ⇧📁 shiftedstorage
 
+[![Test](https://github.com/edsu/shiftedstorage/actions/workflows/test.yml/badge.svg)](https://github.com/edsu/shiftedstorage/actions/workflows/test.yml)
+
 *shiftedstorage* is a tailored configuration of [Docker], [IPFS Cluster] and [Tailscale] that allows a trusted network of archives to cooperatively back up each other's data. This work is part of [Shift Collective]'s [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
 
 In a nutshell, the goal of *shiftedstorage* is to provide an alternative to "big-tech" storage services, that is:
