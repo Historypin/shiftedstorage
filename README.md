@@ -2,7 +2,7 @@
 
 [![Test](https://github.com/edsu/shiftedstorage/actions/workflows/test.yml/badge.svg)](https://github.com/edsu/shiftedstorage/actions/workflows/test.yml)
 
-*shiftedstorage* is a tailored configuration of [Docker], [IPFS Cluster] and [Tailscale] that allows a trusted network of archives to cooperatively back up each other's data. This work is part of [Shift Collective]'s [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
+*shiftedstorage* is a small Python command line utility that lets you create and manage a trusted, decentralized storage system for community archives. All the heavy lifting is done by [IPFS Cluster] and [Tailscale] which provides a virtual private mesh network for the cluster participants that the rest of the world can't see. This work is part of [Shift Collective]'s [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
 
 In a nutshell, the goal of *shiftedstorage* is to provide an alternative to "big-tech" storage services, that is:
 
@@ -39,24 +39,28 @@ Of course it's not all rainbows and unicorns, there are tradeoffs to this approa
 
 ## Install
 
-First, install the `ipfs` and `ipfs-cluster-ctl` command line utilities, and make sure they are in your system path. You don't need to run the cluster on your workstation, however having these utilities available makes it easy to talk to running nodes.
+First, install the `ipfs` and `ipfs-cluster-ctl` command line utilities, and make sure they are in your system path. You don't need to run the cluster on your workstation, however having these utilities available makes it easy for the `shiftedstorage` command line tool to talk to running nodes.
 
 * `ipfs`: https://docs.ipfs.tech/install/command-line/#install-official-binary-distributions
 * `ipfs-cluster-ctl`: https://dist.ipfs.tech/#ipfs-cluster-ctl
 
-You will need to install the `shiftedstorage` utility which helps create the Docker compose file for the bootstrap node and then clone that for subsequent nodes in your network.
+You will want to install [Docker] on whatever machine you are planning to run your node on.
 
-You can install it with:
+You will also need to install the `shiftedstorage` utility which helps create the Docker compose file for the bootstrap node and then clone that for subsequent nodes in your network.
+
+The preferred way to run `shiftedstorage` is with the `uvx` utility from [uv]. uv makes it easy to run Python utilities without needing to download and install them, or even have Python available.
+
+```
+uvx shiftedstorage
+```
+
+Alternatively, you can install shiftedstorage using Python's package manager with:
 
 ```
 pip install shiftedstorage
 ```
 
-or if you have [uv]() installed you can just run it without installing it with `uvx`:
-
-```
-uvx shiftedstorage
-```
+The rest of the documentation uses examples with `uvx` but if you install with `pip` you should be able to remove that part of the command.
 
 ## Setup Bootstrap Node
 
@@ -148,6 +152,7 @@ uvx shiftedstorage status --host <cid>
 uvx shiftedstorage rm --host <cid>
 ```
 
+[uv]: https://docs.astral.sh/uv/getting-started/installation/
 [Docker]: https://www.docker.com/get-started/
 [Tailscale]: https://tailscale.com/
 [IPFS Cluster]: https://ipfscluster.io/
