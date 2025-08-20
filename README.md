@@ -2,7 +2,9 @@
 
 [![Test](https://github.com/edsu/shiftedstorage/actions/workflows/test.yml/badge.svg)](https://github.com/edsu/shiftedstorage/actions/workflows/test.yml)
 
-*shiftedstorage* is a small Python command line utility that lets you create and manage a [Docker] based, trusted, decentralized storage system for community archives. All the heavy lifting is done by [IPFS Cluster] and [Tailscale] which provides a virtual private mesh network for the cluster participants that the rest of the world can't see. This work is part of [Shift Collective]'s [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
+*shiftedstorage* is a small Python command line utility that lets you create and manage a [Docker] based, trusted, decentralized storage system for community archives. All the heavy lifting is done by [IPFS Cluster] and [Tailscale] which provides a virtual private mesh network for the cluster participants that the rest of the world can't see.
+
+This work is part of [Shift Collective]'s [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
 
 In a nutshell, the goal of *shiftedstorage* is to provide an alternative to "big-tech" storage services, that is:
 
