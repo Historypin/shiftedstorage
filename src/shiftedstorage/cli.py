@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import click
 
 from shiftedstorage import compose
@@ -56,3 +58,54 @@ def set_bootstrap_peer(cluster_peername: str, bootstrap_host: str) -> None:
     can talk to the bootstrap node.
     """
     compose.set_bootstrap_peer(cluster_peername, bootstrap_host)
+
+
+@cli.command()
+@click.option("--cluster-peername", required=True)
+@click.argument("path", type=click.Path(exists=True, path_type=Path), required=True)
+def add(cluster_peername: str, path: click.Path) -> None:
+    """
+    Add a file or directory to the storage cluster using a peer hostname.
+    """
+    print(f"adding {path} to {cluster_peername}")
+    print(compose.add(path, host=cluster_peername))
+
+
+@cli.command()
+@click.option("--cluster-peername", required=True)
+@click.argument("cid", required=True)
+def status(cid: str, cluster_peername: str) -> None:
+    """
+    Output the status of a CID in the cluster.
+    """
+    print(compose.status(cid, host=cluster_peername))
+
+
+@cli.command()
+@click.option("--cluster-peername", required=True)
+def ls(cluster_peername: str) -> None:
+    """
+    List CIDs that are pinned in the cluster.
+    """
+    print(compose.ls(host=cluster_peername))
+
+
+@cli.command()
+@click.option("--cluster-peername", required=True)
+@click.argument("cid", required=True)
+def rm(cid: str, cluster_peername: str) -> None:
+    """
+    Remove a CID from the cluster.
+    """
+    print(compose.rm(cid, host=cluster_peername))
+
+
+@cli.command()
+@click.argument("cid", required=True)
+@click.option("--cluster-peername", required=True)
+@click.option("--output", type=click.Path(exists=False, path_type=Path), required=True)
+def get(cid: str, cluster_peername: str, output: click.File) -> None:
+    """t
+    Get contents of a file and write to STDOUT or a file.
+    """
+    compose.get(cid, host=cluster_peername, output=output)

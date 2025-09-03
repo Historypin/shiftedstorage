@@ -178,6 +178,48 @@ def compose_text(
     return yaml.dump(doc)
 
 
+def add(path: Path, host: str) -> str:
+    """
+    Add a given file or directory to the cluster.
+    """
+    cmd = f"ipfs-cluster-ctl --host /dns4/{host}/tcp/9094 add"
+
+    if path.is_dir():
+        cmd += " --recursive"
+
+    cmd += f" {path}"
+
+    return run(cmd)
+
+
+def status(cid: str, host: str) -> str:
+    """
+    Add a given file or directory to the cluster.
+    """
+    return run(f"ipfs-cluster-ctl --host /dns4/{host}/tcp/9094 status {cid}")
+
+
+def ls(host: str) -> str:
+    """
+    List CIDs that are pinned in the cluster.
+    """
+    return run(f"ipfs-cluster-ctl --host /dns4/{host}/tcp/9094 pin ls")
+
+
+def rm(cid: str, host: str) -> str:
+    """
+    Remove a CID from the cluster.
+    """
+    return run(f"ipfs-cluster-ctl --host /dns4/{host}/tcp/9094 pin rm {cid}")
+
+
+def get(cid: str, host: str, output: Path) -> str:
+    """
+    Remove a CID from the cluster.
+    """
+    run(f"ipfs --api /dns/{host}/tcp/5001 get --output {output} {cid}")
+
+
 def run(cmd, parse_json=False) -> str:
     """
     Run a system command and return the output, optionally parsing JSON output.

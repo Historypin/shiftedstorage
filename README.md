@@ -134,26 +134,40 @@ The shiftedstorage utility offers some functionality to add and remove content f
 
 ### Adding Content
 
-```
-uvx shiftedstorage add --host acme my-file.pdf
-```
-
-or 
+Add a file:
 
 ```
-uvx shiftedstorage add --host acme my-directory/
+uvx shiftedstorage add --cluster-peername acme my-file.pdf
+```
+
+or a directory:
+
+```
+uvx shiftedstorage add --cluster-peername acme my-directory/
 ```
 
 ### Checking Status
 
+See what the status of a given CID is in the cluster:
+
 ```
-uvx shiftedstorage status --host <cid>
+uvx shiftedstorage status --cluster-peername acme <cid>
+```
+
+### Get a CID
+
+Fetch a CID and store as a local file:
+
+```
+uvx shiftedstorage get --cluster-peername acme --output /path/to/file <cid>
 ```
 
 ### Removing Content
 
+Remove a CID from the cluster:
+
 ```
-uvx shiftedstorage rm --host <cid>
+uvx shiftedstorage rm --cluster-peername acme <cid>
 ```
 
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
