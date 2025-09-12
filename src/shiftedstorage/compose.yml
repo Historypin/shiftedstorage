@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   ipfs:
-    image: ipfs/kubo:v0.36 # pinned because of https://github.com/edsu/shiftedstorage/issues/2
+    image: ipfs/kubo:v0.36.0 # pinned because of https://github.com/edsu/shiftedstorage/issues/2
     environment:
     volumes:
       - ipfs:/data/ipfs
