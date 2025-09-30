@@ -1,6 +1,6 @@
 # ⇧📁 shiftedstorage
 
-[![Test](https://github.com/edsu/shiftedstorage/actions/workflows/test.yml/badge.svg)](https://github.com/edsu/shiftedstorage/actions/workflows/test.yml)
+[![Test](https://github.com/historypin/shiftedstorage/actions/workflows/test.yml/badge.svg)](https://github.com/historypin/shiftedstorage/actions/workflows/test.yml)
 
 *shiftedstorage* is a small Python command line utility that lets you create and manage a [Docker] based, trusted, decentralized storage system for community archives. All the heavy lifting is done by [IPFS Cluster] and [Tailscale] which provides a virtual private mesh network for the cluster participants that the rest of the world can't see. The familiar value proposition here is that yes, "Lots of Copies Keeps Stuff Safe", but also, that it can help if those copies are in different geopolitical regions.
 
