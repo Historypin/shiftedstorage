@@ -109,7 +109,7 @@ $ docker compose stop
 In order to let others join the network you will need to share a modified version of the compose file with them via a secure channel (e.g. WhatsApp or Signal).
 
 ```
-uvx shiftedstorage clone --input compose.yml --cluster-peername acme --output acme-compose.yml --bootstrap-host boostrap
+uvx shiftedstorage clone --input compose.yml --cluster-peername acme --output acme-compose.yml --bootstrap-host bootstrap
 ```
 
 This will write out a `acme-compose.yml` file which you can share via a secure channel with someone running a machine at that organization.
