@@ -1,6 +1,6 @@
 [project]
 name = "shiftedstorage"
-version = "0.3.0"
+version = "0.3.1"
 description = "Distributed storage for community archives using ipfs-cluster, Tailscale and Docker"
 readme = "README.md"
 requires-python = ">=3.13"
