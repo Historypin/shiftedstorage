@@ -41,6 +41,13 @@ services:
     network_mode: service:tailscale
     restart: unless-stopped
 
+  ui:
+    environment:
+      CLUSTER_REST_URL: 0.0.0.0:9094
+    image: edsu/shiftedstorage-ui:latest
+    network_mode: service:tailscale
+    restart: unless-stopped
+
 volumes:
   ipfs:
   ipfs-cluster:
