@@ -5,7 +5,7 @@ from unittest.mock import Mock
 
 import yaml
 
-from communitycloudstorage import compose
+from community_cloud_storage import compose
 
 
 def test_create(tmp_path):
