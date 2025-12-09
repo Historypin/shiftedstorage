@@ -79,11 +79,11 @@ Your IPFS Cluster will run in a virtual private mesh network using Tailscale. Ta
 
 After you create your account, you will need to ensure that the access rules allow the nodes in your cluster to talk to each other. Tailscale gives you a great deal of control over these rules but a useful place to start is to simply allow all the user and devices to see each other. To do this go to your Access Control tab in Tailscale admin and use the Visual Editor to ensure it has a rule that allows all users and devices in your tailnet to see each other. 
 
-<img src="https://github.com/historypin/shiftedstorage-ui/raw/main/images/tailscale-01.png?raw=true">
+<img src="https://github.com/historypin/shiftedstorage/raw/main/images/tailscale-01.png?raw=true">
 
 These settings are just to get you started with your storage cluster. You can further refine them as needed as you develop your cluster and use Tailscale for other things.
 
-<img src="https://github.com/historypin/shiftedstorage-ui/raw/main/images/tailscale-02.png?raw=true">
+<img src="https://github.com/historypin/shiftedstorage/raw/main/images/tailscale-02.png?raw=true">
 
 Be sure to also mention that any admins should get invited to the Tailscale so they can see it from their workstation.
 
@@ -157,7 +157,7 @@ If you have added your workstation to the Tailnet (see the *Add Device* in the *
 
 So if you created a node called *bootstrap* you should be able to visit *http:bootstrap* in your browser and see this interface, which lets you add content to the cluster, see how it has been replicated, and download it.
 
-<img src="https://github.com/historypin/shiftedstorage-ui/raw/main/images/ui.png?raw=true">
+<img src="https://github.com/historypin/shiftedstorage/raw/main/images/ui.png?raw=true">
 
 ## Command Line
 
