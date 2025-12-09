@@ -29,7 +29,7 @@ In a nutshell, the goal of *shiftedstorage* is to provide an alternative to "big
 * *tailscale*: a Tailscale client that establishes your node's connection to other trusted nodes in the mesh network.
 * *ipfs*: an IPFS daemon running on the Tailscale network.
 * *ipfs-cluster*: an IPFS Cluster daemon configured to talk to the IPFS service using the Tailscale network.
-* ui: [shiftedstorage-ui] web application running in nginx
+* *ui*: a single-page web application served up by nginx which talks to the IPFS Cluster API
 
 Of course it's not all rainbows and unicorns, there are tradeoffs to this approach:
 
