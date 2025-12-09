@@ -5,7 +5,7 @@ from unittest.mock import Mock
 
 import yaml
 
-from shiftedstorage import compose
+from communitycloudstorage import compose
 
 
 def test_create(tmp_path):
@@ -20,7 +20,7 @@ def test_create(tmp_path):
     assert compose_path.is_file()
     doc = yaml.load(compose_path.open("r"), Loader=yaml.Loader)
 
-    assert doc["name"] == "shiftedstorage"
+    assert doc["name"] == "community-cloud-storage"
     assert doc["services"]["tailscale"]["hostname"] == "bootstrap"
     assert doc["services"]["tailscale"]["environment"]["TS_AUTHKEY"] == "abc123def"
 
@@ -79,7 +79,7 @@ def test_clone(tmp_path, monkeypatch):
 
     doc = yaml.load(new_compose_path.open("r"), Loader=yaml.Loader)
 
-    assert doc["name"] == "shiftedstorage"
+    assert doc["name"] == "community-cloud-storage"
     assert doc["services"]["tailscale"]["hostname"] == "clone"
     assert doc["services"]["tailscale"]["environment"]["TS_AUTHKEY"] == "abc123def"
     assert (

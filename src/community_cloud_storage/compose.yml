@@ -1,4 +1,4 @@
-name: shiftedstorage
+name: community-cloud-storage
 
 services:
   tailscale:
@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   ipfs:
-    image: ipfs/kubo:v0.36.0 # pinned because of https://github.com/edsu/shiftedstorage/issues/2
+    image: ipfs/kubo:v0.36.0 # pinned because of https://github.com/historypin/community-cloud-storage/issues/2
     environment:
     volumes:
       - ipfs:/data/ipfs
@@ -45,7 +45,7 @@ services:
     environment:
       CLUSTER_REST_URL: 0.0.0.0:9094
       IPFS_REST_URL: 0.0.0.0:8080
-    image: edsu/shiftedstorage-ui:latest
+    image: edsu/community-cloud-storage-ui:latest
     network_mode: service:tailscale
     restart: unless-stopped
 

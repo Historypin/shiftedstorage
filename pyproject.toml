@@ -1,5 +1,5 @@
 [project]
-name = "shiftedstorage"
+name = "community-cloud-storage"
 version = "0.3.1"
 description = "Distributed storage for community archives using ipfs-cluster, Tailscale and Docker"
 readme = "README.md"
@@ -8,11 +8,11 @@ dependencies = [
     "click>=8.2.1",
     "pyyaml>=6.0.2",
 ]
-packages = ["shiftedstorage"]
-repository = "https://github.com/historypin/shiftedstorage"
+packages = ["community_cloud_storage"]
+repository = "https://github.com/historypin/community-cloud-storage"
 
 [project.scripts]
-shiftedstorage = "shiftedstorage:cli"
+community-cloud-storage = "community_cloud_storage:cli"
 
 [dependency-groups]
 dev = [

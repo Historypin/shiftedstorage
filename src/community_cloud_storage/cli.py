@@ -2,7 +2,7 @@ from pathlib import Path
 
 import click
 
-from shiftedstorage import compose
+from community_cloud_storage import compose
 
 
 @click.group()
@@ -16,7 +16,7 @@ def cli():
 @click.option("--output", type=click.File("w"), default="-")
 def create(output: click.File, cluster_peername: str, ts_authkey: str):
     """
-    Create a new shiftedstorage Docker Compose file.
+    Create a new community-cloud-storage Docker Compose file.
     """
     compose.create(output, cluster_peername=cluster_peername, ts_authkey=ts_authkey)
 

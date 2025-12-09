@@ -1,12 +1,12 @@
-# ⇧📁 shiftedstorage
+# ⇧📁 community-cloud-storage
 
-[![Test](https://github.com/historypin/shiftedstorage/actions/workflows/test.yml/badge.svg)](https://github.com/historypin/shiftedstorage/actions/workflows/test.yml)
+[![Test](https://github.com/historypin/community-cloud-storage/actions/workflows/test.yml/badge.svg)](https://github.com/historypin/community-cloud-storage/actions/workflows/test.yml)
 
-*shiftedstorage* is a command line utility that lets you create and manage a [Docker] based, trusted, decentralized storage system for community archives. All the heavy lifting is done by [IPFS Cluster] and [Tailscale] which provides a virtual private mesh network for the cluster participants that the rest of the world can't see. A small static web application is also included which makes it easy to see see what files have been added to the cluster, and retrieve them.
+*community-cloud-storage* is a command line utility that lets you create and manage a [Docker] based, trusted, decentralized storage system for community archives. All the heavy lifting is done by [IPFS Cluster] and [Tailscale] which provides a virtual private mesh network for the cluster participants that the rest of the world can't see. A small static web application is also included which makes it easy to see see what files have been added to the cluster, and retrieve them.
 
 This work is part of [Shift Collective]'s [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
 
-In a nutshell, the goal of *shiftedstorage* is to provide an alternative to "big-tech" storage services, that is:
+In a nutshell, the goal of *community-cloud-storage* is to provide an alternative to "big-tech" storage services, that is:
 
 - *Decentralized* instead of *Centralized*: the software is open source and can
   be deployed on infrastructure that is operated by the members in their data centers,
@@ -19,12 +19,12 @@ In a nutshell, the goal of *shiftedstorage* is to provide an alternative to "big
   any time.
 - *Private* instead of *Public*: many peer-to-peer and distributed web systems
   are built around the idea of data being globally available, and easy to
-  replicate. Data in *shiftedstorage* is not made available to the
+  replicate. Data in *community-cloud-storage* is not made available to the
   wider IPFS network. The use of Tailscale allows peers to communicate
   directly with each other using a virtual private mesh network, that only they
   can see.
 
-*shiftedstorage* is really just a Docker Compose configuration for reliably bringing up Docker services that allows a network of shiftedstorage instances to talk to each other. The containers are:
+*community-cloud-storage* is really just a Docker Compose configuration for reliably bringing up Docker services that allows a network of community-cloud-storage instances to talk to each other. The containers are:
 
 * *tailscale*: a Tailscale client that establishes your node's connection to other trusted nodes in the mesh network.
 * *ipfs*: an IPFS daemon running on the Tailscale network.
@@ -40,38 +40,38 @@ Of course it's not all rainbows and unicorns, there are tradeoffs to this approa
 * Tailscale makes establishing a virtual private mesh network easy using the open source Wireguard software and some of their own open source code and infrastructure. However, Tailscale are a company and could decide to change how they do things at any time.
 * Tailscale doesn't have access to any of the stored data, but they do know the network topology of the IPFS cluster, and could be issued a subpoena in some jurisdictions that forces them to share who is a member of the network. Read more about this [here](https://tailscale.com/blog/tailscale-privacy-anonymity).
 
-In short, shiftedstorage doesn't solve the Governance Problem. You have to decide who is in your trusted network, and everyone in your network needs to decide what your values are, and specifically what norms are around deleting content, and growing the network.
+In short, community-cloud-storage doesn't solve the Governance Problem. You have to decide who is in your trusted network, and everyone in your network needs to decide what your values are, and specifically what norms are around deleting content, and growing the network.
 
 ## Install
 
-First, install the `ipfs` and `ipfs-cluster-ctl` command line utilities, and make sure they are in your system path. You don't need to run the cluster on your workstation, however having these utilities available makes it easy for the `shiftedstorage` command line tool to talk to running nodes.
+First, install the `ipfs` and `ipfs-cluster-ctl` command line utilities, and make sure they are in your system path. You don't need to run the cluster on your workstation, however having these utilities available makes it easy for the `community-cloud-storage` command line tool to talk to running nodes.
 
 * `ipfs`: https://docs.ipfs.tech/install/command-line/#install-official-binary-distributions
 * `ipfs-cluster-ctl`: https://dist.ipfs.tech/#ipfs-cluster-ctl
 
 You will want to install [Docker] on whatever machine you are planning to run your node on.
 
-You will also need to install the `shiftedstorage` utility which helps create the Docker compose file for the bootstrap node and then clone that for subsequent nodes in your network.
+You will also need to install the `community-cloud-storage` utility which helps create the Docker compose file for the bootstrap node and then clone that for subsequent nodes in your network.
 
-The preferred way to run `shiftedstorage` is with the `uvx` utility from [uv]. uv makes it easy to run Python utilities without needing to download and install them, or even have Python available.
-
-```
-uvx shiftedstorage
-```
-
-Alternatively, you can install shiftedstorage using Python's package manager with:
+The preferred way to run `community-cloud-storage` is with the `uvx` utility from [uv]. uv makes it easy to run Python utilities without needing to download and install them, or even have Python available.
 
 ```
-pip install shiftedstorage
+uvx community-cloud-storage
+```
+
+Alternatively, you can install community-cloud-storage using Python's package manager with:
+
+```
+pip install community-cloud-storage
 ```
 
 The rest of the documentation uses examples with `uvx` but if you install with `pip` you should be able to remove that part of the command.
 
 ## Setup Bootstrap Node
 
-*Note: if you are creating a shiftedstorage node in an existing network jump down to the [Let Others Join](#let-others-join) section below.*
+*Note: if you are creating a community-cloud-storage node in an existing network jump down to the [Let Others Join](#let-others-join) section below.*
 
-The first node in a *shiftedstorage* network is known as the bootstrap node. It requires a bit more setup than subsequent nodes because the Tailscale mesh network needs to be created and configured, and a couple secret keys need to be defined. This bootstrap node will be used by subsequent nodes to find the rest of the network when they join.
+The first node in a *community-cloud-storage* network is known as the bootstrap node. It requires a bit more setup than subsequent nodes because the Tailscale mesh network needs to be created and configured, and a couple secret keys need to be defined. This bootstrap node will be used by subsequent nodes to find the rest of the network when they join.
 
 ### Tailscale
 
@@ -79,17 +79,17 @@ Your IPFS Cluster will run in a virtual private mesh network using Tailscale. Ta
 
 After you create your account, you will need to ensure that the access rules allow the nodes in your cluster to talk to each other. Tailscale gives you a great deal of control over these rules but a useful place to start is to simply allow all the user and devices to see each other. To do this go to your Access Control tab in Tailscale admin and use the Visual Editor to ensure it has a rule that allows all users and devices in your tailnet to see each other. 
 
-<img src="https://github.com/historypin/shiftedstorage/raw/main/images/tailscale-01.png?raw=true">
+<img src="https://github.com/historypin/community-cloud-storage/raw/main/images/tailscale-01.png?raw=true">
 
 These settings are just to get you started with your storage cluster. You can further refine them as needed as you develop your cluster and use Tailscale for other things.
 
-<img src="https://github.com/historypin/shiftedstorage/raw/main/images/tailscale-02.png?raw=true">
+<img src="https://github.com/historypin/community-cloud-storage/raw/main/images/tailscale-02.png?raw=true">
 
 Be sure to also mention that any admins should get invited to the Tailscale so they can see it from their workstation.
 
 ### Tailscale Auth Key
 
-You will need to create an Authorization Key to use in your shiftedstorage configuration so that new containers can join the private network. To do this click on *Settings* in the top menu, and then *Keys* in the menu to the left. Here you click on *Generate auth key* button and enter:
+You will need to create an Authorization Key to use in your community-cloud-storage configuration so that new containers can join the private network. To do this click on *Settings* in the top menu, and then *Keys* in the menu to the left. Here you click on *Generate auth key* button and enter:
 
 * a description for your storage network (e.g. my-storage)
 * make the key *reusable*
@@ -106,7 +106,7 @@ Use your Tailscale token to create your bootstrap node, which here is named `boo
 In place of the `"YOUR KEY HERE"` you will want to put the Tailscale Auth Key you generated in the previous step.
 
 ```
-uvx shiftedstorage create --ts-authkey "YOUR KEY HERE" --cluster-peername bootstrap --output compose.yml
+uvx community-cloud-storage create --ts-authkey "YOUR KEY HERE" --cluster-peername bootstrap --output compose.yml
 ```
 
 This should write a Docker Compose configuration to `compose.yaml`.
@@ -121,7 +121,7 @@ You can now start up your bootstrap node with:
 $ docker compose up -d
 ```
 
-If you want to stop the service at any time you can execute this command, as long as you are in the `shiftedstorage` directory:
+If you want to stop the service at any time you can execute this command, as long as you are in the `community-cloud-storage` directory:
 
 ```
 $ docker compose stop
@@ -132,7 +132,7 @@ $ docker compose stop
 In order to let others join the network you will need to share a modified version of the compose file with them via a secure channel (e.g. WhatsApp or Signal).
 
 ```
-uvx shiftedstorage clone --input compose.yml --cluster-peername acme --output acme-compose.yml --bootstrap-host bootstrap
+uvx community-cloud-storage clone --input compose.yml --cluster-peername acme --output acme-compose.yml --bootstrap-host bootstrap
 ```
 
 This will write out a `acme-compose.yml` file which you can share via a secure channel with someone running a machine at that organization.
@@ -145,7 +145,7 @@ For people with a QNAP you can:
 2. Open Container Station.
 3. Click `Applications` option in the menu on the left.
 4. Click the `Create` button.
-5. In the Application Name box enter `shiftedstorage`
+5. In the Application Name box enter `community-cloud-storage`
 6. Paste the contents of the supplied `compose.yml` file into the text box.
 7. Click the `create` button.
 8. Click the `Containers` option in the menu on the left.
@@ -153,28 +153,28 @@ For people with a QNAP you can:
 
 ## Working With Storage
 
-If you have added your workstation to the Tailnet (see the *Add Device* in the *Machines* tab of the Tailscale Admin) you should be able to see the shiftedstorage-ui web interface at the node's host name. Each node is running the same web application that is able to communicate to its IPFS Cluster node.
+If you have added your workstation to the Tailnet (see the *Add Device* in the *Machines* tab of the Tailscale Admin) you should be able to see the community-cloud-storage-ui web interface at the node's host name. Each node is running the same web application that is able to communicate to its IPFS Cluster node.
 
 So if you created a node called *bootstrap* you should be able to visit *http:bootstrap* in your browser and see this interface, which lets you add content to the cluster, see how it has been replicated, and download it.
 
-<img src="https://github.com/historypin/shiftedstorage/raw/main/images/ui.png?raw=true">
+<img src="https://github.com/historypin/community-cloud-storage/raw/main/images/ui.png?raw=true">
 
 ## Command Line
 
-The shiftedstorage utility also offers some functionality to add and remove content from storage. These are really just wrappers around the `ipfs-cluster-ctl` command, which you can choose to use directly of course.
+The community-cloud-storage utility also offers some functionality to add and remove content from storage. These are really just wrappers around the `ipfs-cluster-ctl` command, which you can choose to use directly of course.
 
 ### Adding Content
 
 Add a file:
 
 ```
-uvx shiftedstorage add --cluster-peername acme my-file.pdf
+uvx community-cloud-storage add --cluster-peername acme my-file.pdf
 ```
 
 or a directory:
 
 ```
-uvx shiftedstorage add --cluster-peername acme my-directory/
+uvx community-cloud-storage add --cluster-peername acme my-directory/
 ```
 
 ### Checking Status
@@ -182,7 +182,7 @@ uvx shiftedstorage add --cluster-peername acme my-directory/
 See what the status of a given CID is in the cluster:
 
 ```
-uvx shiftedstorage status --cluster-peername acme <cid>
+uvx communitycloudstorage status --cluster-peername acme <cid>
 ```
 
 ### Get a CID
@@ -190,7 +190,7 @@ uvx shiftedstorage status --cluster-peername acme <cid>
 Fetch a CID and store as a local file:
 
 ```
-uvx shiftedstorage get --cluster-peername acme --output /path/to/file <cid>
+uvx communitycloudstorage get --cluster-peername acme --output /path/to/file <cid>
 ```
 
 ### Removing Content
@@ -198,7 +198,7 @@ uvx shiftedstorage get --cluster-peername acme --output /path/to/file <cid>
 Remove a CID from the cluster:
 
 ```
-uvx shiftedstorage rm --cluster-peername acme <cid>
+uvx community-cloud-storage rm --cluster-peername acme <cid>
 ```
 
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
@@ -209,4 +209,4 @@ uvx shiftedstorage rm --cluster-peername acme <cid>
 [Filecoin Foundation for the Decentralized Web]: https://ffdweb.org/
 [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives]: https://www.shiftcollective.us/ffdw
 [Shift Collective]: https://www.shiftcollective.us/
-[shiftedstorage-ui]: https://github.com/historypin/shiftedstorage-ui
+[community-cloud-storage-ui]: https://github.com/historypin/community-cloud-storage-ui
