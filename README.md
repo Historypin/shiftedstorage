@@ -182,7 +182,7 @@ uvx community-cloud-storage add --cluster-peername acme my-directory/
 See what the status of a given CID is in the cluster:
 
 ```
-uvx communitycloudstorage status --cluster-peername acme <cid>
+uvx community-cloud-storage status --cluster-peername acme <cid>
 ```
 
 ### Get a CID
@@ -190,7 +190,7 @@ uvx communitycloudstorage status --cluster-peername acme <cid>
 Fetch a CID and store as a local file:
 
 ```
-uvx communitycloudstorage get --cluster-peername acme --output /path/to/file <cid>
+uvx community-cloud-storage get --cluster-peername acme --output /path/to/file <cid>
 ```
 
 ### Removing Content

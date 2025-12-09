@@ -1,6 +1,6 @@
 [project]
 name = "community-cloud-storage"
-version = "0.3.1"
+version = "0.3.2"
 description = "Distributed storage for community archives using ipfs-cluster, Tailscale and Docker"
 readme = "README.md"
 requires-python = ">=3.13"
@@ -9,6 +9,8 @@ dependencies = [
     "pyyaml>=6.0.2",
 ]
 packages = ["community_cloud_storage"]
+
+[project.urls]
 repository = "https://github.com/historypin/community-cloud-storage"
 
 [project.scripts]
