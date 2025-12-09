@@ -29,6 +29,7 @@ In a nutshell, the goal of *shiftedstorage* is to provide an alternative to "big
 * *tailscale*: a Tailscale client that establishes your node's connection to other trusted nodes in the mesh network.
 * *ipfs*: an IPFS daemon running on the Tailscale network.
 * *ipfs-cluster*: an IPFS Cluster daemon configured to talk to the IPFS service using the Tailscale network.
+* ui: [shiftedstorage-ui] web application running in nginx
 
 Of course it's not all rainbows and unicorns, there are tradeoffs to this approach:
 
@@ -74,13 +75,35 @@ The first node in a *shiftedstorage* network is known as the bootstrap node. It 
 
 ### Tailscale
 
-TBD! The end goal is to get a `TS_AUTHKEY`.
+Your IPFS Cluster will run in a virtual private mesh network using Tailscale. Tailscale is a service for the open source Wireguard software. Creating a Tailscale account will give you access to the free tier which will be fine for your network. If you are interested in learning more about Tailscale they have a good series of instructional videos such as [Tailscale: Get Started in 10 minutes](https://www.youtube.com/watch?v=sPdvyR7bLqI).
+
+After you create your account, you will need to ensure that the access rules allow the nodes in your cluster to talk to each other. Tailscale gives you a great deal of control over these rules but a useful place to start is to simply allow all the user and devices to see each other. To do this go to your Access Control tab in Tailscale admin and use the Visual Editor to ensure it has a rule that allows all users and devices in your tailnet to see each other. 
+
+<img src="https://github.com/historypin/shiftedstorage-ui/raw/main/images/tailscale-01.png?raw=true">
+
+These settings are just to get you started with your storage cluster. You can further refine them as needed as you develop your cluster and use Tailscale for other things.
+
+<img src="https://github.com/historypin/shiftedstorage-ui/raw/main/images/tailscale-02.png?raw=true">
 
 Be sure to also mention that any admins should get invited to the Tailscale so they can see it from their workstation.
+
+### Tailscale Auth Key
+
+You will need to create an Authorization Key to use in your shiftedstorage configuration so that new containers can join the private network. To do this click on *Settings* in the top menu, and then *Keys* in the menu to the left. Here you click on *Generate auth key* button and enter:
+
+* a description for your storage network (e.g. my-storage)
+* make the key *reusable*
+* set the maximum of 90 days for the expiration which should be plenty of time to set up your network
+* not ephemeral (allows your node to go offline and come back up again)
+* tags: add the *container* tag
+* click the *Generate Key* button
+* copy the new key, and save it somewhere private where you can find it again
 
 ### Create Compose File
 
 Use your Tailscale token to create your bootstrap node, which here is named `bootstrap` but can be whatever you like. This will be the hostname of the bootstrap node in your Tailscale network.
+
+In place of the `"YOUR KEY HERE"` you will want to put the Tailscale Auth Key you generated in the previous step.
 
 ```
 uvx shiftedstorage create --ts-authkey "YOUR KEY HERE" --cluster-peername bootstrap --output compose.yml
@@ -130,7 +153,15 @@ For people with a QNAP you can:
 
 ## Working With Storage
 
-The shiftedstorage utility offers some functionality to add and remove content from storage. These are really just wrappers around the `ipfs-cluster-ctl` command, which you can choose to use directly of course.
+If you have added your workstation to the Tailnet (see the *Add Device* in the *Machines* tab of the Tailscale Admin) you should be able to see the shiftedstorage-ui web interface at the node's host name. Each node is running the same web application that is able to communicate to its IPFS Cluster node.
+
+So if you created a node called *bootstrap* you should be able to visit *http:bootstrap* in your browser and see this interface, which lets you add content to the cluster, see how it has been replicated, and download it.
+
+<img src="https://github.com/historypin/shiftedstorage-ui/raw/main/images/ui.png?raw=true">
+
+## Command Line
+
+The shiftedstorage utility also offers some functionality to add and remove content from storage. These are really just wrappers around the `ipfs-cluster-ctl` command, which you can choose to use directly of course.
 
 ### Adding Content
 
@@ -178,3 +209,4 @@ uvx shiftedstorage rm --cluster-peername acme <cid>
 [Filecoin Foundation for the Decentralized Web]: https://ffdweb.org/
 [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives]: https://www.shiftcollective.us/ffdw
 [Shift Collective]: https://www.shiftcollective.us/
+[shiftedstorage-ui]: https://github.com/historypin/shiftedstorage-ui
