@@ -1,4 +1,4 @@
-# ⇧📁 community-cloud-storage
+# community-cloud-storage
 
 [![Test](https://github.com/historypin/community-cloud-storage/actions/workflows/test.yml/badge.svg)](https://github.com/historypin/community-cloud-storage/actions/workflows/test.yml)
 
