@@ -42,7 +42,7 @@ Of course it's not all rainbows and unicorns, there are tradeoffs to this approa
 
 In short, community-cloud-storage doesn't solve the Governance Problem. You have to decide who is in your trusted network, and everyone in your network needs to decide what your values are, and specifically what norms are around deleting content, and growing the network.
 
-Thanks to TRANSFERArchive's [DATA.TRUST] project for the example of using IPFS Cluster with Tailscale to help ensure data privacy, and reliable cluster connectivity. We had hoped to use DATA.TRUST directly, however our projects were on slightly different timelines, and community-cloud-storage had no use requirements to use Filecoin. Also, thank you to the Flickr Foundation's [Data Lifeboat] project for their example of using static site archives in preservation work, which led to Historypin's [pincushion] application for exporting content for import into IPFS Cluster.
+Thanks to TRANSFERArchive's [DATA.TRUST] project for the example of using IPFS Cluster with Tailscale to help ensure data privacy, and reliable cluster connectivity. We had hoped to use DATA.TRUST directly, however our projects were on slightly different timelines, and community-cloud-storage had no requirements that needed to be satisfied by Filecoin. Also, thank you to the Flickr Foundation's [Data Lifeboat] project for their example of using static site archives in preservation work, which led to Historypin's [pincushion] application for exporting content for import into IPFS Cluster.
 
 ## Install
 
