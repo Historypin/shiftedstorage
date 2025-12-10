@@ -42,6 +42,8 @@ Of course it's not all rainbows and unicorns, there are tradeoffs to this approa
 
 In short, community-cloud-storage doesn't solve the Governance Problem. You have to decide who is in your trusted network, and everyone in your network needs to decide what your values are, and specifically what norms are around deleting content, and growing the network.
 
+Thanks to TRANSFERArchive's [DATA.TRUST] project for the example of using IPFS Cluster with Tailscale to help ensure data privacy, and reliable cluster connectivity. We had hoped to use DATA.TRUST directly, however our projects were on slightly different timelines, and community-cloud-storage had no use requirements to use Filecoin. Also, thank you to the Flickr Foundation's [Data Lifeboat] project for their example of using static site archives in preservation work, which led to Historypin's [pincushion] application for exporting content for import into IPFS Cluster.
+
 ## Install
 
 First, install the `ipfs` and `ipfs-cluster-ctl` command line utilities, and make sure they are in your system path. You don't need to run the cluster on your workstation, however having these utilities available makes it easy for the `community-cloud-storage` command line tool to talk to running nodes.
@@ -210,3 +212,6 @@ uvx community-cloud-storage rm --cluster-peername acme <cid>
 [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives]: https://www.shiftcollective.us/ffdw
 [Shift Collective]: https://www.shiftcollective.us/
 [community-cloud-storage-ui]: https://github.com/historypin/community-cloud-storage-ui
+[Data Lifeboat]: https://datalifeboat.flickr.org/
+[DATA.TRUST]: https://github.com/TRANSFERArchive/DATA.TRUST
+[pincushion]: https://github.com/historypin/pincushion
