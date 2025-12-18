@@ -2,6 +2,8 @@
 
 [![Test](https://github.com/historypin/community-cloud-storage/actions/workflows/test.yml/badge.svg)](https://github.com/historypin/community-cloud-storage/actions/workflows/test.yml)
 
+*community-cloud-storage* gives communities actual data sovereignty. By keeping archival materials on a private, member-run mesh network rather than in corporate clouds, community-cloud-storage prevents AI companies, governments, or third parties from quietly scraping, indexing, or subpoenaing your files from a central host. Because data lives only on physical nodes inside a closed Tailscale/IPFS Cluster, it never leaks into the public IPFS network or any big-tech ecosystem, and is still accessible globally to trusted devices through the user interface.
+
 *community-cloud-storage* is a command line utility that lets you create and manage a [Docker] based, trusted, decentralized storage system for community archives. All the heavy lifting is done by [IPFS Cluster] and [Tailscale] which provides a virtual private mesh network for the cluster participants that the rest of the world can't see. A small static web application is also included which makes it easy to see what files have been added to the cluster, and retrieve them.
 
 This work is part of [Shift Collective]'s [Modeling Sustainable Futures: Exploring Decentralized Digital Storage for Community Based Archives] project, which was funded by the [Filecoin Foundation for the Decentralized Web]. For more details you can read reports linked from the project's homepage.
@@ -154,6 +156,8 @@ For people with a QNAP you can:
 9. Verify that you see three containers running.
 
 ## Working With Storage
+
+*community-cloud-storage* includes a lightweight web UI that can be accessed from any trusted device on the Tailscale network—your phone, a laptop across town, or remote workstations around the world. As long as the device is authorized in the community’s tailnet, you can upload, browse what’s stored, check cluster health, and download files without needing to be physically on the same LAN as any node. File deletion remains intentionally restricted to the command line, ensuring that only admins with direct node access can permanently remove data from the cluster.
 
 If you have added your workstation to the Tailnet (see the *Add Device* in the *Machines* tab of the Tailscale Admin) you should be able to see the community-cloud-storage-ui web interface at the node's host name. Each node is running the same web application that is able to communicate to its IPFS Cluster node.
 
